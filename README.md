@@ -22,4 +22,8 @@ Dentro de um virtualenv com python3.6:
 
 ```
 git clone git@github.com:VFS/prototipo_bolsa.git
+pip install -r requirements.txt
+chmod a+x run.py
+./run.py
 ```
+E então abra o seu navegador em [http://127.0.0.1:5000](http://127.0.0.1:5000)
