@@ -10,9 +10,9 @@ def index():
 
 @app.route('/api')
 def stock():
-    stock = [
-        {'date': '2010-05-01', 'val': 10},
-        {'date': '2010-05-02', 'val': 5},
-        {'date': '2010-05-03', 'val': 20},
-    ]
+    stock = {
+        'data1': [1, 2, 3],
+        'data2': [2, 3, 3],
+        'data3': [4, 1, 1]
+    }
     return jsonify(stock)
