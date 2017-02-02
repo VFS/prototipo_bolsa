@@ -1,8 +1,91 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Title</title>
-  </head>
-  <body>
-    <h1>Sup</h1>
-  </body>
-</html>
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mockup Protótipo BOVESPA</title>
+
+  <!-- Load c3.css, Pure.css and custom css-->
+  <link href="static/css/c3.min.css" rel="stylesheet" type="text/css">
+  <link href="static/css/pure-min.css" rel="stylesheet" type="text/css" />
+  <link href="static/css/style.css" rel="stylesheet" type="text/css" />
+
+  <!-- Load d3.js v3.5.17 and c3.js -->
+  <script src="static/js/d3.min.js" charset="utf-8"></script>
+  <script src="static/js/c3.min.js"></script>
+</head>
+
+<body>
+
+  <div class="pure-g">
+    <div class="pure-u-1-5">
+      <h1>Protótipo</h1>
+    </div>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-5-24">
+      <form class="pure-form pure-form-aligned">
+        <fieldset>
+          <div class="pure-control-group">
+              <label for="stock">Ação</label>
+              <input id="stock" type="text" placeholder="DTEX3" /><br />
+              <label for="start-date">Data Inicial</label>
+              <input id="start-date" type="text" placeholder="11/nov/16" /><br />
+              <label for="end-date">Data Final</label>
+              <input id="end-date" type="text" placeholder="20/jan/2017" />
+          </div>
+          <button class="pure-button" id="porcentual">Variação Porcentual</button><br />
+          <button class="pure-button" id="base100" disabled="true">Variação Base 100</button>
+        </fieldset>
+      </form>
+
+
+    </div>
+    <div class="pure-u-19-24">
+      <div id="chart"></div>
+      <table class="pure-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>N.</th>
+            <th>Qtd. Ações</th>
+            <th>Valor R$</th>
+            <th>Doador</th>
+            <th>Tomador</th>
+            <th>Cotação Média</th>
+            <th>Taxa méd. 3 Dias</th>
+            <th>Posição em Aberto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20/jan/17</td>
+            <td>28</td>
+            <td>1.374.735</td>
+            <td>10.049.313</td>
+            <td>0.89%</td>
+            <td>0.93%</td>
+            <td>7,31</td>
+            <td>-</td>
+            <td>19.187.184</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> <!-- /.pure-g -->
+
+
+
+
+  <script>
+  var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      url: '/api',
+      mimeType: 'json'
+    }
+});
+</script>
+</body>
