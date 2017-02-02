@@ -13,6 +13,10 @@ Os campos da tabela da CBLC estão explicados em um [manual fornecido pela próp
 * [CBLC](http://www.cblc.com.br/cblc/consultas/Arquivos/DBTCER9999.txt)
 * [CDI](ftp://ftp.cetip.com.br/IndiceDI/)
 
+## Bibliotecas
+* PureCSS
+* C3/D3.js
+
 ## Uso
 Dentro de um virtualenv com python3.6:
 
