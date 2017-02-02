@@ -9,13 +9,13 @@ Também é exibida uma tabela só da CBLC. Ela será sempre do último dia dispo
 Os campos da tabela da CBLC estão explicados em um [manual fornecido pela própria CBLC](http://bvmf.bmfbovespa.com.br/BancoTitulosBTC/download/DBTCER9999_v3.pdf).
 
 ## Fontes de dados:
-* Ação: [Yahoo Finance](https://yahoo.com)
+* Ação: Yahoo Finance por meio da biblioteca [yahoo-finance](https://pypi.python.org/pypi/yahoo-finance)
 * [CBLC](http://www.cblc.com.br/cblc/consultas/Arquivos/DBTCER9999.txt)
 * [CDI](ftp://ftp.cetip.com.br/IndiceDI/)
 
 ## Bibliotecas
-* PureCSS
-* C3/D3.js
+* [PureCSS](https://purecss.io/)
+* [C3](https://c3js.org) / [D3](https://d3js.org).js
 
 ## Uso
 Dentro de um virtualenv com python3.6:
