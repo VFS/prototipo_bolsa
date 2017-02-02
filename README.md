@@ -12,3 +12,10 @@ Os campos da tabela da CBLC estão explicados em um [manual fornecido pela próp
 * Ação: [Yahoo Finance](https://yahoo.com)
 * [CBLC](http://www.cblc.com.br/cblc/consultas/Arquivos/DBTCER9999.txt)
 * [CDI](ftp://ftp.cetip.com.br/IndiceDI/)
+
+## Uso
+Dentro de um virtualenv com python3.6:
+
+```
+git clone git@github.com:VFS/prototipo_bolsa.git
+```
