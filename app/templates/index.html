@@ -84,11 +84,38 @@
 
   <script>
   var chart = c3.generate({
-    bindto: '#chart',
-    data: {
-      url: '/api',
-      mimeType: 'json'
-    }
+      data: {
+        url: '/api',
+        mimeType: 'json',
+        keys: {
+            x: 'Date',
+            value: ['Adj_Close']
+        },
+      },
+      zoom: {
+        enabled: true
+      },
+      axis: {
+        y: {
+          label: 'Valor'
+        },
+        y2: {
+          show: true
+        },
+        x: {
+          label: {
+            text: 'Data'
+          },
+            type: 'category',
+            tick: {
+              centered: true,
+              multiline: false,
+              rotate: -75,
+              format: '%d/%m/%Y'
+            },
+            height: 100
+        }
+ }
 });
 </script>
 </body>
