@@ -31,6 +31,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/api')
-def stock():
+@app.route('/api/<stock>/<start_date>/<end_date>.json')
+def build_json(stock, start_date, end_date):
     return jsonify(s_h)
