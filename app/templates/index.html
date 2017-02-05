@@ -14,9 +14,14 @@
   <!-- Load d3.js v3.5.17 and c3.js -->
   <script src="static/js/d3.min.js" charset="utf-8"></script>
   <script src="static/js/c3.min.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 
 <body>
+
+  <div id="app">
+    {{ message }}
+  </div>
 
   <div class="pure-g">
     <div class="pure-u-1-5">
@@ -36,8 +41,8 @@
               <label for="end-date">Data Final</label>
               <input id="end-date" type="text" placeholder="20/jan/2017" />
           </div>
-          <button class="pure-button" id="porcentual">Variação Porcentual</button><br />
-          <button class="pure-button" id="base100" disabled="true">Variação Base 100</button>
+          <button class="pure-button">Atualizar</button><br />
+
         </fieldset>
       </form>
 
@@ -86,9 +91,6 @@
     </div>
   </div> <!-- /.pure-g -->
 
-
-
-
   <script>
   var chart = c3.generate({
       data: {
@@ -122,7 +124,7 @@
             },
             height: 100
         }
- }
-});
+      }
+    });
 </script>
 </body>
