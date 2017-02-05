@@ -36,12 +36,12 @@
           <div class="pure-control-group">
               <label for="stock">Ação</label>
               <input id="stock" type="text" placeholder="DTEX3" /><br />
-              <label for="start-date">Data Inicial</label>
-              <input id="start-date" type="text" placeholder="11/nov/16" /><br />
-              <label for="end-date">Data Final</label>
-              <input id="end-date" type="text" placeholder="20/jan/2017" />
+              <label for="start_date">Data Inicial</label>
+              <input id="start_date" type="text" placeholder="11/nov/16" /><br />
+              <label for="end_date">Data Final</label>
+              <input id="end_date" type="text" placeholder="20/jan/2017" />
           </div>
-          <button class="pure-button">Atualizar</button><br />
+          <button type="button" onclick="update_chart()" class="pure-button">Atualizar</button><br />
 
         </fieldset>
       </form>
@@ -92,13 +92,16 @@
   </div> <!-- /.pure-g -->
 
   <script>
+  var base_url = '/api'
+  var query_url = base_url + '/stock/dtex3/2016-11-11/2017-01-20/stock.json'
+
   var chart = c3.generate({
       data: {
-        url: '/api/stock/dtex3/2016-11-11/2017-01-20/stock.json',
+        url: query_url,
         mimeType: 'json',
         keys: {
             x: 'Date',
-            value: ['Adj_Close']
+            value: ['Adj_Close','High']
         },
       },
       zoom: {
@@ -126,5 +129,47 @@
         }
       }
     });
+
+  function update_chart() {
+    var stock = document.getElementById('stock').value;
+    var start_date = document.getElementById('start_date').value;
+    var end_date = document.getElementById('end_date').value;
+    query_url = base_url + '/stock/' + stock + '/' + start_date + '/' + end_date + '/stock.json'
+    //alert(stock + start_date + end_date)
+    var chart = c3.generate({
+        data: {
+          url: query_url,
+          mimeType: 'json',
+          keys: {
+              x: 'Date',
+              value: ['Adj_Close','High']
+          },
+        },
+        zoom: {
+          enabled: true
+        },
+        axis: {
+          y: {
+            label: 'Valor'
+          },
+          y2: {
+            show: true
+          },
+          x: {
+            label: {
+              text: 'Data'
+            },
+              type: 'category',
+              tick: {
+                centered: true,
+                multiline: false,
+                rotate: -75,
+                format: '%d/%m/%Y'
+              },
+              height: 100
+          }
+        }
+      });
+  };
 </script>
 </body>
