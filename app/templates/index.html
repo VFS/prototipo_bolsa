@@ -41,6 +41,13 @@
         </fieldset>
       </form>
 
+    <h4>API Sample JSON</h4>
+    <ul>
+      <li><a href="/api/stock/dtex3/2017-01-10/2017-02-02/stock.json">stock.json</a></li>
+      <li><a href="/api/cdi/2017-01-10/2017-02-02/cdi.json">cdi.json</a></li>
+      <li><a href="/api/stock_cdi/dtex3/2017-01-10/2017-02-02/stock_cdi.json">stock_cdi.json</a></li>
+      <li><a href="/api/cblc/dtex3/cblc.json">cblc.json</a></li>
+    </ul>
 
     </div>
     <div class="pure-u-19-24">
@@ -85,7 +92,7 @@
   <script>
   var chart = c3.generate({
       data: {
-        url: '/api/dtex3/2016-11-11/2017-01-20.json',
+        url: '/api/stock/dtex3/2016-11-11/2017-01-20/stock.json',
         mimeType: 'json',
         keys: {
             x: 'Date',
