@@ -6,6 +6,16 @@ import struct
 """
 
 
+# CBLC data will live on a dict
+cblc_dict = {
+    '00': [],
+    '01': [],
+    '02': [],
+    '03': [],
+    '99': []
+}
+
+
 # source = 'http://127.0.0.1:8080/DBTCER9999.txt' # Debug with a local server
 source = 'http://www.cblc.com.br/cblc/consultas/Arquivos/DBTCER9999.txt'
 reg_size = 162  # (bytes) 160+linebreak+CR (from the official documentation)
@@ -53,7 +63,8 @@ def parse_header(line):
         'Data_movimento',
         'Reserva'
         ]
-    return dict(zip(keys, parsed))  # zip combines iterable elements
+    cblc_dict['00'].append(dict(zip(keys, parsed)))
+    # return dict(zip(keys, parsed))  # zip combines iterable elements
 
 
 def parse_registry_one_day(line):
@@ -74,7 +85,8 @@ def parse_registry_one_day(line):
         'Tx_Max_Tomador',
         'Reserva'
     ]
-    return dict(zip(keys, parsed))
+    cblc_dict['01'].append(dict(zip(keys, parsed)))
+    # return dict(zip(keys, parsed))
 
 
 def parse_registry_three_days(line):
@@ -91,7 +103,8 @@ def parse_registry_three_days(line):
         'Tx_Med_Tomador',
         'Reserva'
     ]
-    return dict(zip(keys, parsed))
+    cblc_dict['02'].append(dict(zip(keys, parsed)))
+    # return dict(zip(keys, parsed))
 
 
 def parse_registry_fiften_days(line):
@@ -108,7 +121,8 @@ def parse_registry_fiften_days(line):
         'Tx_Med_Tomador',
         'Reserva'
     ]
-    return dict(zip(keys, parsed))
+    cblc_dict['03'].append(dict(zip(keys, parsed)))
+    # return dict(zip(keys, parsed))
 
 
 def parse_registry_trailer(line):
@@ -124,7 +138,8 @@ def parse_registry_trailer(line):
         'Qtd_registros',
         'Reserva'
     ]
-    return dict(zip(keys, parsed))
+    cblc_dict['99'].append(dict(zip(keys, parsed)))
+    # return dict(zip(keys, parsed))
 
 
 # Pythonic way to perform a "case-switch" control is to use a dictionary
@@ -148,3 +163,10 @@ with data as file:
     for line in range(0, total_lines):
         entry = file.read(reg_size)
         print(parse_registry(entry))
+
+
+
+
+print('\n\n ~~~~~~ \n\n')
+
+print(cblc_dict)
