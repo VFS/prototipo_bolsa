@@ -1,3 +1,4 @@
+{% raw %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +19,6 @@
 </head>
 
 <body>
-
-  <div id="app">
-    {{ message }}
-  </div>
-
   <div class="pure-g">
     <div class="pure-u-1-5">
       <h1>Protótipo</h1>
@@ -31,74 +27,83 @@
 
   <div class="pure-g">
     <div class="pure-u-5-24">
+      <div id="menu">
       <form class="pure-form pure-form-aligned">
         <fieldset>
           <div class="pure-control-group">
               <label for="stock">Ação</label>
               <input id="stock" type="text" placeholder="DTEX3" /><br />
-              <label for="start-date">Data Inicial</label>
-              <input id="start-date" type="text" placeholder="11/nov/16" /><br />
-              <label for="end-date">Data Final</label>
-              <input id="end-date" type="text" placeholder="20/jan/2017" />
+              <label for="start_date">Data Inicial</label>
+              <input id="start_date" type="text" placeholder="2016-11-11" /><br />
+              <label for="end_date">Data Final</label>
+              <input id="end_date" type="text" placeholder="2017-01-20" />
           </div>
-          <button class="pure-button">Atualizar</button><br />
+          <button type="button" onclick="update_cblc(); update_chart(); " class="pure-button">Atualizar</button><br />
 
         </fieldset>
       </form>
 
-    <h4>API Sample JSON</h4>
-    <ul>
-      <li><a href="/api/stock/dtex3/2017-01-10/2017-02-02/stock.json">stock.json</a></li>
-      <li><a href="/api/cdi/2017-01-10/2017-02-02/cdi.json">cdi.json</a></li>
-      <li><a href="/api/stock_cdi/dtex3/2017-01-10/2017-02-02/stock_cdi.json">stock_cdi.json</a></li>
-      <li><a href="/api/cblc/dtex3/cblc.json">cblc.json</a></li>
-    </ul>
-
+      <h4>API Sample JSON</h4>
+      <ul>
+        <li><a href="/api/stock/dtex3/2017-01-10/2017-02-02/stock.json">stock.json</a></li>
+        <li><a href="/api/cdi/2017-01-10/2017-02-02/cdi.json">cdi.json</a></li>
+        <li><a href="/api/stock_cdi/dtex3/2017-01-10/2017-02-02/stock_cdi.json">stock_cdi.json</a></li>
+        <li><a href="/api/cblc/dtex3/cblc.json">cblc.json</a></li>
+      </ul>
     </div>
+    </div> <!-- /.leftcol -->
     <div class="pure-u-19-24">
 
       <!-- C3 Chart -->
       <div id="chart"></div>
 
+<div id="demo">
       <table class="pure-table">
         <thead>
-          <tr>
-            <th>Data</th>
-            <th>N.</th>
-            <th>Qtd. Ações</th>
-            <th>Valor R$</th>
-            <th>Doador</th>
-            <th>Tomador</th>
-            <th>Cotação Média</th>
-            <th>Taxa méd. 3 Dias</th>
-            <th>Posição em Aberto</th>
-          </tr>
+          <th>Date</th>
+          <th>N.</th>
+          <th>Qtd. Ações</th>
+          <th>Valor R$</th>
+          <th>Doador</th>
+          <th>Tomador</th>
+          <th>Cotação Média</th>
+          <th>Tx Méd 3d</th>
+          <th>Posicao em Aberto</th>
         </thead>
         <tbody>
           <tr>
-            <td>20/jan/17</td>
-            <td>28</td>
-            <td>1.374.735</td>
-            <td>10.049.313</td>
-            <td>0.89%</td>
-            <td>0.93%</td>
-            <td>7,31</td>
+            <td>{{ params.r00.Data_geracao }}</td>
+            <td>{{ params.r01.Acao }}</td>
+            <td>{{ params.r01.Qtd_Acao }}</td>
+            <td>{{ params.r01.Valor }}</td>
             <td>-</td>
-            <td>19.187.184</td>
+            <td>-</td>
+            <td>-</td>
+            <td>{{ params.r02.Tx_Med_Doador }}</td>
+            <td>-</td>
           </tr>
         </tbody>
       </table>
+
+
+
+
     </div>
   </div> <!-- /.pure-g -->
 
+</div>
   <script>
+
+  var base_url = '/api'
+  var query_url = base_url + '/stock/dtex3/2016-11-11/2017-01-20/stock.json'
+
   var chart = c3.generate({
       data: {
-        url: '/api/stock/dtex3/2016-11-11/2017-01-20/stock.json',
+        url: query_url,
         mimeType: 'json',
         keys: {
             x: 'Date',
-            value: ['Adj_Close']
+            value: ['Adj_Close','High']
         },
       },
       zoom: {
@@ -126,5 +131,92 @@
         }
       }
     });
+  function update_cblc() {
+
+  }
+
+  function update_chart() {
+    var stock = document.getElementById('stock').value;
+    var start_date = document.getElementById('start_date').value;
+    var end_date = document.getElementById('end_date').value;
+    query_url = base_url + 'stock/' + stock + '/' + start_date + '/' + end_date + '/stock.json'
+    //alert(stock + start_date + end_date)
+    var chart = c3.generate({
+        data: {
+          url: query_url,
+          mimeType: 'json',
+          keys: {
+              x: 'Date',
+              value: ['Adj_Close','High']
+          },
+        },
+        zoom: {
+          enabled: true
+        },
+        axis: {
+          y: {
+            label: 'Valor'
+          },
+          y2: {
+            show: true
+          },
+          x: {
+            label: {
+              text: 'Data'
+            },
+              type: 'category',
+              tick: {
+                centered: true,
+                multiline: false,
+                rotate: -75,
+                format: '%d/%m/%Y'
+              },
+              height: 100
+          }
+        }
+      });
+  };
+
+
+  var stock = 'dtex3'
+  var base_url = 'http://127.0.0.1:5000/api/'
+  var end_url = '/cblc.json'
+  //apiURL = base_url + stock + end_url
+
+
+  var demo = new Vue({
+
+    el: '#demo',
+
+    data: {
+      params: null
+    },
+
+    created: function () {
+      this.fetchData()
+    },
+
+    watch: {
+      currentBranch: 'fetchData'
+    },
+
+    filters: {
+    },
+
+    methods: {
+      fetchData: function () {
+        var xhr = new XMLHttpRequest()
+        var self = this
+        xhr.open('GET', base_url + 'cblc/' + stock + end_url)
+        xhr.onload = function () {
+          self.params = JSON.parse(xhr.responseText)
+          console.log(self.params)
+        }
+        xhr.send()
+      }
+    }
+
+  })
 </script>
 </body>
+{% endraw %}

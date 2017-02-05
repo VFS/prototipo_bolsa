@@ -52,7 +52,25 @@ def create_stock_response(stock, start_date, end_date):
 
 
 def create_cblc(stock):
-    return cblc_data.get()
+    stock = stock.upper()
+    print(stock)
+    r = cblc_data.get()
+    response = {}
+    response['r00'] = r['00'][0]
+
+    for el in r['01']:
+        if(el['Acao'] == stock):
+            response['r01'] = el
+
+    for el in r['02']:
+        if(el['Acao'] == stock):
+            response['r02'] = el
+
+    for el in r['03']:
+        if(el['Acao'] == stock):
+            response['r03'] = el
+
+    return response
 
 
 def create_cdi(start_date, end_date):
