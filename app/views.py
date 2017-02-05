@@ -34,7 +34,7 @@ def create_stock_cdi_response(stock, start_date, end_date):
     cdi_data.populate_CDI_by_range(start_date, end_date)
 
     response = cdi_data.get()
-    return stock
+    return response
 
 
 def create_stock_response(stock, start_date, end_date):
@@ -48,10 +48,6 @@ def create_stock_response(stock, start_date, end_date):
     stock = stock.get_historical(start_date, end_date)
     stock.reverse()
 
-    cdi_data = CDI()
-    cdi_data.populate_CDI_by_range(start_date, end_date)
-
-    response = cdi_data.get()
     return stock
 
 
