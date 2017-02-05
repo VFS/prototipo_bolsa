@@ -15,6 +15,10 @@ s_h = dtex.get_historical('2016-11-11', '2017-01-20')
 s_h.reverse()
 
 
+cblc_data = CBLC()
+
+
+
 def create_response(stock, start_date, end_date):
     print('Request for: %s from: %s to: %s' % (stock, start_date, end_date))
     # yahoo finance uses a sufix to identify the market BOVESPA is .sa
@@ -23,11 +27,18 @@ def create_response(stock, start_date, end_date):
 
     stock = Share(stock)
     print('Stock info: ' + stock.get_name())
-    response = stock.get_historical(start_date, end_date)
-    response.reverse()
-    # response = s_h
-    # return response
-    return response
+    stock = stock.get_historical(start_date, end_date)
+    stock.reverse()
+
+    cdi_data = CDI()
+    cdi_data.populate_CDI_by_range(start_date, end_date)
+
+    response = cdi_data.get()
+    return stock
+
+
+def create_cblc(stock):
+    return 'sup'
 
 
 @app.route('/')
@@ -37,5 +48,10 @@ def index():
 
 
 @app.route('/api/<stock>/<start_date>/<end_date>.json')
-def build_json(stock, start_date, end_date):
+def build_stock_cdi_json(stock, start_date, end_date):
     return jsonify(create_response(stock, start_date, end_date))
+
+
+@app.route('/api/<stock>/cblc.json')
+def build_cblc_json(stock):
+    return jsonify(create_cblc('asddsa'))
