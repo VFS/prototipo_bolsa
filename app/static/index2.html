@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title></title>
+
+  </head>
+  <body>
+
+    <div id="demo">
+      <table>
+        <thead>
+          <th>Date</th>
+          <th>N.</th>
+          <th>Qtd. Ações</th>
+          <th>Valor R$</th>
+          <th>Doador</th>
+          <th>Tomador</th>
+          <th>Cotação Média</th>
+          <th>Tx Méd 3d</th>
+          <th>Posicao em Aberto</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ params.r00.Data_geracao }}</td>
+            <td>{{ params.r01.Acao }}</td>
+            <td>{{ params.r01.Qtd_Acao }}</td>
+            <td>{{ params.r01.Valor }}</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>{{ params.r02.Tx_Med_Doador }}</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <script>
+  var stock = 'dtex3'
+  var base_url = 'http://127.0.0.1:5000/api/cblc/'
+  var end_url = '/cblc.json'
+  //apiURL = base_url + stock + end_url
+
+  var demo = new Vue({
+
+    el: '#demo',
+
+    data: {
+      params: null
+    },
+
+    created: function () {
+      this.fetchData()
+    },
+
+    watch: {
+      currentBranch: 'fetchData'
+    },
+
+    filters: {
+    },
+
+    methods: {
+      fetchData: function () {
+        var xhr = new XMLHttpRequest()
+        var self = this
+        xhr.open('GET', base_url + stock + end_url)
+        xhr.onload = function () {
+          self.params = JSON.parse(xhr.responseText)
+          console.log(self.params)
+        }
+        xhr.send()
+      }
+    }
+
+  })
+  </script>
+  </body>
+</html>
