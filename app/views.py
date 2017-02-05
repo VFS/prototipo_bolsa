@@ -16,14 +16,14 @@ s_h.reverse()
 
 
 def create_response(stock, start_date, end_date):
-    print('Request for: ' + stock)
+    print('Request for: %s from: %s to: %s' % (stock, start_date, end_date))
     # yahoo finance uses a sufix to identify the market BOVESPA is .sa
     if stock[-3:] != '.sa':
         stock = stock + '.sa'
 
     stock = Share(stock)
     print('Stock info: ' + stock.get_name())
-    response = stock.get_historical('2016-11-11', '2017-01-20')
+    response = stock.get_historical(start_date, end_date)
     response.reverse()
     # response = s_h
     # return response
