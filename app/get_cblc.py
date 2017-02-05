@@ -1,12 +1,11 @@
 import urllib.request
 import struct
 
-"""
+class CBLC:
+    sup = 'asd'
 
-"""
 
-
-# CBLC data will live on a dict
+    # CBLC data will live on a dict
 cblc_dict = {
     '00': [],
     '01': [],
@@ -162,11 +161,11 @@ def parse_registry(line):
 with data as file:
     for line in range(0, total_lines):
         entry = file.read(reg_size)
-        print(parse_registry(entry))
+        # print(parse_registry(entry))
 
 
 
 
-print('\n\n ~~~~~~ \n\n')
+#print('\n\n ~~~~~~ \n\n')
 
-print(cblc_dict)
+# print(cblc_dict)

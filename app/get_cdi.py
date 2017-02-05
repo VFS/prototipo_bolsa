@@ -7,6 +7,9 @@ base_url = 'ftp://ftp.cetip.com.br/IndiceDI/'
 # CDI data will live on a dict
 cdi_dict = dict()
 
+class CDI:
+    sup = 'dsa'
+
 
 # Fetch a file from a specific day and return it's data as a dict
 def get_CDI_by_date(d):
@@ -51,4 +54,4 @@ def get_CDI_by_range(start, end):
 get_CDI_by_range('2017-01-20', '2017-02-10')
 # print(get_CDI_by_range('2017-01-20', '2017-02-10'))
 
-print(cdi_dict)
+# print(cdi_dict)

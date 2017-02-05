@@ -1,6 +1,8 @@
 from flask import jsonify, render_template
 from yahoo_finance import Share
 from app import app
+from app.get_cblc import CBLC
+from app.get_cdi import CDI
 
 
 # We create a Share object based on the Symbol we want
@@ -13,6 +15,11 @@ s_h = dtex.get_historical('2016-11-11', '2017-01-20')
 s_h.reverse()
 
 
+def create_response(stock, start_date, end_date):
+    response = s_h
+    return response
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -21,4 +28,4 @@ def index():
 
 @app.route('/api/<stock>/<start_date>/<end_date>.json')
 def build_json(stock, start_date, end_date):
-    return jsonify(s_h)
+    return jsonify(create_response(stock, start_date, end_date))
