@@ -18,7 +18,9 @@ def get_CDI_by_date(d):
         content = data.read()
         cdi = int(content.strip().decode()) * 0.01
         cdi = format(cdi, '.2f')
-        return cdi
+        # print('\n ~~~~~~~~~~~ \n')
+        cdi_dict[d.strftime('%Y-%m-%d')] = cdi
+        # return cdi
 
     except:
         print('Deu ruim')
@@ -31,7 +33,7 @@ def get_CDI_by_range(start, end):
 
     if end > datetime.today():
         end = datetime.today()
-        print("You can't fetch future information!")
+        # print("You can't fetch future information!")
 
     delta = timedelta(days=1)
     d = start
@@ -40,14 +42,13 @@ def get_CDI_by_range(start, end):
     weekend = set([5, 6])  # Saturday and Sunday
     while d <= end:
         if d.weekday() not in weekend:
-            print(d.strftime('%Y-%m-%d' + ': ' + get_CDI_by_date(d)))
+            # print(d.strftime('%Y-%m-%d' + ': ' + get_CDI_by_date(d)))
+            get_CDI_by_date(d)
             diff += 1
         d += delta
 
 
-print(get_CDI_by_range('2017-01-20', '2017-02-10'))
-
-print('\n\n====\n\n')
-
+get_CDI_by_range('2017-01-20', '2017-02-10')
+# print(get_CDI_by_range('2017-01-20', '2017-02-10'))
 
 print(cdi_dict)
