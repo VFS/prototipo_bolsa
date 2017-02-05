@@ -1,15 +1,26 @@
 import urllib.request
 import struct
 
-source = 'http://127.0.0.1:8080/DBTCER9999.txt'
+"""
+
+"""
+
+
+# source = 'http://127.0.0.1:8080/DBTCER9999.txt' # Debug with a local server
 source = 'http://www.cblc.com.br/cblc/consultas/Arquivos/DBTCER9999.txt'
-reg_size = 162  # 160+linebreak+CR
+reg_size = 162  # (bytes) 160+linebreak+CR (from the official documentation)
 
 data = urllib.request.urlopen(source)
+
+# Total size in bytes is sent as a header
 size = int(data.getheader('Content-Length'))
 total_lines = int(size / reg_size)
 
-kind_mask = '2s'  # The first two bytes identify the registry kind
+# The first two bytes identify the registry kind
+kind_mask = '2s'
+
+# Each registry kind has its own struct mask, which will be used to parse byte
+# objects by width. This approach makes it easy to change fields if needed.
 registry_masks = [
     '2s6s4s8s4s8s8s120s',  # 00 = header
     '2s20s30s10s11s20s7s7s7s7s7s7s25s',  # 01 = one day
@@ -42,7 +53,7 @@ def parse_header(line):
         'Data_movimento',
         'Reserva'
         ]
-    return dict(zip(keys, parsed))
+    return dict(zip(keys, parsed))  # zip combines iterable elements
 
 
 def parse_registry_one_day(line):
