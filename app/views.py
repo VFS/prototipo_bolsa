@@ -16,7 +16,8 @@ s_h.reverse()
 
 
 cblc_data = CBLC()
-
+cblc_data.init()
+# print(cblc_data.get())
 
 
 def create_response(stock, start_date, end_date):
@@ -38,7 +39,7 @@ def create_response(stock, start_date, end_date):
 
 
 def create_cblc(stock):
-    return 'sup'
+    return cblc_data.get()
 
 
 @app.route('/')
