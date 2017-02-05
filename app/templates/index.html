@@ -14,9 +14,14 @@
   <!-- Load d3.js v3.5.17 and c3.js -->
   <script src="static/js/d3.min.js" charset="utf-8"></script>
   <script src="static/js/c3.min.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
 </head>
 
 <body>
+
+  <div id="app">
+    {{ message }}
+  </div>
 
   <div class="pure-g">
     <div class="pure-u-1-5">
@@ -36,11 +41,18 @@
               <label for="end-date">Data Final</label>
               <input id="end-date" type="text" placeholder="20/jan/2017" />
           </div>
-          <button class="pure-button" id="porcentual">Variação Porcentual</button><br />
-          <button class="pure-button" id="base100" disabled="true">Variação Base 100</button>
+          <button class="pure-button">Atualizar</button><br />
+
         </fieldset>
       </form>
 
+    <h4>API Sample JSON</h4>
+    <ul>
+      <li><a href="/api/stock/dtex3/2017-01-10/2017-02-02/stock.json">stock.json</a></li>
+      <li><a href="/api/cdi/2017-01-10/2017-02-02/cdi.json">cdi.json</a></li>
+      <li><a href="/api/stock_cdi/dtex3/2017-01-10/2017-02-02/stock_cdi.json">stock_cdi.json</a></li>
+      <li><a href="/api/cblc/dtex3/cblc.json">cblc.json</a></li>
+    </ul>
 
     </div>
     <div class="pure-u-19-24">
@@ -79,13 +91,10 @@
     </div>
   </div> <!-- /.pure-g -->
 
-
-
-
   <script>
   var chart = c3.generate({
       data: {
-        url: '/api/a/b/c.json',
+        url: '/api/stock/dtex3/2016-11-11/2017-01-20/stock.json',
         mimeType: 'json',
         keys: {
             x: 'Date',
@@ -115,7 +124,7 @@
             },
             height: 100
         }
- }
-});
+      }
+    });
 </script>
 </body>
