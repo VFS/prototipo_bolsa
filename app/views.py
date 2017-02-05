@@ -47,7 +47,7 @@ def create_stock_cdi_response(stock, start_date, end_date):
         el['Adj_Close_Percent'] = adj * adj_close_percent
         el_date = el['Date']
         el['CDI'] = r[el_date]
-        el['CDI_percent'] = float(r[el_date]) * cdi_percent
+        el['CDI_Percent'] = float(r[el_date]) * cdi_percent
     print(type(response))
     #print(response)
     #print(r.get())
