@@ -94,8 +94,8 @@
 </div>
   <script>
 
-  var base_url = '/api'
-  var query_url = base_url + '/stock/dtex3/2016-11-11/2017-01-20/stock.json'
+  var base_url = 'http://127.0.0.1:5000/api'
+  var query_url = base_url + '/stock_cdi/dtex3/2017-01-10/2017-02-02/stock_cdi.json'
 
   var chart = c3.generate({
       data: {
@@ -103,7 +103,7 @@
         mimeType: 'json',
         keys: {
             x: 'Date',
-            value: ['Adj_Close','High']
+            value: ['Adj_Close','CDI']
         },
       },
       zoom: {
@@ -139,7 +139,7 @@
     var stock = document.getElementById('stock').value;
     var start_date = document.getElementById('start_date').value;
     var end_date = document.getElementById('end_date').value;
-    query_url = base_url + 'stock/' + stock + '/' + start_date + '/' + end_date + '/stock.json'
+    query_url = base_url + 'stock_cdi/' + stock + '/' + start_date + '/' + end_date + '/stock_cdi.json'
     //alert(stock + start_date + end_date)
     var chart = c3.generate({
         data: {
@@ -147,7 +147,7 @@
           mimeType: 'json',
           keys: {
               x: 'Date',
-              value: ['Adj_Close','High']
+              value: ['Adj_Close','CDI']
           },
         },
         zoom: {

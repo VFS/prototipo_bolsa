@@ -20,7 +20,7 @@ cblc_data.init()
 
 
 def create_stock_cdi_response(stock, start_date, end_date):
-    print('Request for: %s from: %s to: %s' % (stock, start_date, end_date))
+    print('STOCK + CDI Request for: %s from: %s to: %s' % (stock, start_date, end_date))
     # yahoo finance uses a sufix to identify the market BOVESPA is .sa
     if stock[-3:] != '.sa':
         stock = stock + '.sa'
@@ -32,8 +32,15 @@ def create_stock_cdi_response(stock, start_date, end_date):
 
     cdi_data = CDI()
     cdi_data.populate_CDI_by_range(start_date, end_date)
+    r = cdi_data.get()
 
-    response = cdi_data.get()
+    response = stock
+    for el in response:
+        el_date = el['Date']
+        el['CDI'] = r[el_date]
+    print(type(response))
+    #print(response)
+    #print(r.get())
     return response
 
 

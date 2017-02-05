@@ -30,8 +30,8 @@ class CDI:
 
     # iterates trough a date range, ignoring weekends
     def populate_CDI_by_range(self, start, end):
-        print(start)
-        print(end)
+        # print(start)
+        # print(end)
         start = datetime.strptime(start, '%Y-%m-%d')
         end = datetime.strptime(end, '%Y-%m-%d')
 
