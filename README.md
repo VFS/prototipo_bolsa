@@ -30,5 +30,8 @@ E então abra o seu navegador em [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ## JSON
 ```
-  http://127.0.0.1:5000/api/<stock>/<start_date>/<end_date>.json
+  /api/stock/<stock>/<start_date>/<end_date>/stock.json
+  /api/cblc/<stock>/cblc.json
+  /api/stock_cdi/<stock>/<start_date>/<end_date>/stock_cdi.json
+  /api/cdi/<start_date>/<end_date>/cdi.json
 ```
