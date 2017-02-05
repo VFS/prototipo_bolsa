@@ -155,9 +155,3 @@ class CBLC:
     def parse_registry(self, line):
         kind = int(kind_struct.unpack_from(line)[0].decode())
         self.parsers[kind](self, line)
-        # return parsed
-
-
-#    with data as file:
-#        for line in range(0, total_lines):
-#            entry = file.read(reg_size)
