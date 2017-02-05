@@ -56,18 +56,19 @@ def create_cblc(stock):
     print(stock)
     r = cblc_data.get()
     response = {}
+    response['r00'] = r['00'][0]
 
     for el in r['01']:
         if(el['Acao'] == stock):
-            response['01'] = el
+            response['r01'] = el
 
     for el in r['02']:
         if(el['Acao'] == stock):
-            response['02'] = el
+            response['r02'] = el
 
     for el in r['03']:
         if(el['Acao'] == stock):
-            response['03'] = el
+            response['r03'] = el
 
     return response
 
